@@ -2,21 +2,18 @@ import React, {useRef, useState} from 'react';
 import CardView from "./Card/CardView";
 import Card from "./lib/Card";
 import CardDeck from "./lib/CardDeck";
+import PokerHand from "./lib/PokerHand";
 
 import './App.css';
 
 const App = () => {
     const [cards, setCards] = useState<Card[]>([]);
-    // const cardDeck = new CardDeck();
-    // const [cardDeck] = useState(() => new CardDeck());
 
     const cardDeck = useRef(new CardDeck());
     const deck: CardDeck = cardDeck.current;
     const getCards = () => {
 
         const newCards: Card[] = deck.getCards(5);
-
-        console.log(deck.deck);
 
         setCards(newCards);
     };
@@ -31,6 +28,8 @@ const App = () => {
 
     let btnText: string = deck.deck.length < 5 ? 'Deck is empty' : 'Get Cards';
 
+    const pokerHand: PokerHand = new PokerHand(cards);
+    const pokerHandText: string = pokerHand.getOutcome();
 
     return (
         <div className="App">
@@ -45,6 +44,7 @@ const App = () => {
 
             <div className="App">
                 <button className="getCard-btn" onClick={getCards} disabled={deck.deck.length < 5}>{btnText}</button>
+                <span className="hand-status">Poker Hand: {pokerHandText ? pokerHandText : 'Нет комбинации'}</span>
             </div>
 
         </div>

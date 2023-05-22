@@ -6,3 +6,8 @@
 .getCard-btn {
   cursor: pointer;
 }
+
+.hand-status {
+  display: inline-block;
+  margin-left: 25px;
+}
